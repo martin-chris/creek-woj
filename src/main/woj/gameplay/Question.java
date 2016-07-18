@@ -26,7 +26,7 @@ public class Question {
 	
 	public String toString(){
 		String output = question + "\n";
-		for(String key : answers.keySet()){
+		for(String key : sortedAnswerKeys()){
 			output += key + ": " + answers.get(key) + "\n";
 		}
 		output += "Answer: " + answer + " (" + getAnswer() + ")";
