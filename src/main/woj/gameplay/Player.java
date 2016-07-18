@@ -1,3 +1,4 @@
+package main.woj.gameplay;
 class Player 
 {
 	//Class Data Members
