@@ -5,8 +5,6 @@ import java.util.Random;
 
 public class Wheel {
 	private Random random;
-	private ArrayList<Category> categories;
-	private static final int NUM_CATEGORIES = 12;
 	public enum StaticCategory {
 		CATEGORY_1,
 		CATEGORY_2,
@@ -22,8 +20,7 @@ public class Wheel {
 		SPIN_AGAIN
 	}
 	
-	public Wheel(ArrayList<Category> categories){
-		this.categories = categories;
+	public Wheel(){
 		this.random = new Random();
 	}
 	

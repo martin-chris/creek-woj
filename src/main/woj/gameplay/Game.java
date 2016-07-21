@@ -88,7 +88,7 @@ public class Game {
 				handleLoseTurn();
 				break;
 			case FREE_TURN:
-				System.out.println("Free turn");
+				System.out.println("Free turn - " + getCurrentPlayer().getExtraTurnsCounter()+1 + " extra turns available");
 				handleFreeTurn();
 				break;
 			case BANKRUPT:
@@ -180,7 +180,7 @@ public class Game {
 		players.add(new Player("Player 2"));
 		try {
 			categories = QuestionDeserializer.importQuestionSet(questionSet);
-			wheel = new Wheel(categories);
+			wheel = new Wheel();
 			board = new Board(categories);
 		} catch (YamlException | FileNotFoundException e) {
 			e.printStackTrace();
