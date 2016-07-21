@@ -3,6 +3,7 @@ game:
     title: Math
     questions:
      - question: What is 1+1?
+       difficulty: 1
        answer: b
        answers:
         a: 1
@@ -10,6 +11,7 @@ game:
         c: 3
         d: 4
      - question: What is 2+2?
+       difficulty: 2
        answer: d
        answers:
         a: 1
@@ -17,6 +19,7 @@ game:
         c: 3
         d: 4
      - question: What is 1*1?
+       difficulty: 3
        answer: a
        answers:
         a: 1
@@ -24,6 +27,7 @@ game:
         c: 3
         d: 4
      - question: What is 1*2?
+       difficulty: 4
        answer: b
        answers:
         a: 1
@@ -31,6 +35,7 @@ game:
         c: 3
         d: 4
      - question: What is 2*2?
+       difficulty: 5
        answer: d
        answers:
         a: 1
@@ -40,17 +45,20 @@ game:
   - category:
     title: Geography
     questions:
-     - question: Alaska is a Russian territory 
+     - question: Alaska is a Russian territory
+       difficulty: 1
        answer: b
        answers:
         a: true
         b: false
      - question: The United States is considered part of Latin America
+       difficulty: 2
        answer: b
        answers:
         a: true
         b: false
      - question: What is the capital of California?
+       difficulty: 3
        answer: b
        answers:
         a: San Francisco
@@ -58,6 +66,7 @@ game:
         c: Los Angeles
         d: Los Gatos
      - question: What is the smallest US state by population?
+       difficulty: 4
        answer: c
        answers:
         a: New York
@@ -65,9 +74,168 @@ game:
         c: Wyoming
         d: Maine
      - question: What is the largest state by land mass?
+       difficulty: 5
        answer: d
        answers:
         a: Texas
         b: California
         c: Florida
         d: Alaska
+  - category:
+    title: Sports
+    questions:
+     - question: Which team isn't in the NFL? 
+       difficulty: 1
+       answer: c
+       answers:
+        a: Cowboys
+        b: Seahawks
+        c: Mavericks
+        d: Patriots
+     - question: Who was the NBA MVP in 2015-16?
+       difficulty: 2
+       answer: c
+       answers:
+        a: Lebron James
+        b: James Harden
+        c: Stephen Curry
+        d: Dwight Howard
+     - question: Which team won the 2016 Copa America?
+       difficulty: 3
+       answer: d
+       answers:
+        a: Raiders
+        b: Real Madrid
+        c: Argentina
+        d: Chile
+     - question: Which player hasn't won a Super Bowl?
+       difficulty: 4
+       answer: a
+       answers:
+        a: Cam Newton
+        b: Drew Brees
+        c: Aaron Rodgers
+        d: Eli Manning
+     - question: Who holds the record for most major titles by a male tennis player?
+       difficulty: 5
+       answer: a
+       answers:
+        a: Roger Federer
+        b: Novak Djokovic
+        c: Rafael Nadal
+        d: Pete Sampras
+  - category:
+    title: American History
+    questions:
+     - question: What year did Christopher Columbus arrive in North America? 
+       difficulty: 1
+       answer: d
+       answers:
+        a: 1997
+        b: 1392
+        c: 1480
+        d: 1492
+     - question: What was the 50th state approved for statehood?
+       difficulty: 2
+       answer: c
+       answers:
+        a: Alaska
+        b: Vermont
+        c: Hawaii
+        d: New Mexico
+     - question: Who was the first elected US President?
+       difficulty: 3
+       answer: c
+       answers:
+        a: Abraham Lincoln
+        b: John Adams
+        c: George Washington
+        d: Thomas Jefferson
+     - question: Who was the first completely unelected US President?
+       difficulty: 4
+       answer: d
+       answers:
+        a: Millard Fillmore
+        b: John Tyler
+        c: Chester Arthur
+        d: Gerald Ford
+     - question: Who was the first impeached US President?
+       difficulty: 5
+       answer: d
+       answers:
+        a: Bill Clinton
+        b: George Bush
+        c: Richard Nixon
+        d: Andrew Johnson
+  - category:
+    title: Biology
+    questions:
+     - question: Which species is not a reptile?
+       difficulty: 1
+       answer: c
+       answers:
+        a: Lizard
+        b: Snake
+        c: Salamander
+        d: Alligator
+     - question: Which species is not a mammal?
+       difficulty: 2
+       answer: d
+       answers:
+        a: Dolphin
+        b: Whale
+        c: Seals
+        d: Turtle
+     - question: Which species is considered a fish?
+       difficulty: 3
+       answer: c
+       answers:
+        a: Shrimp
+        b: Crab
+        c: Barracuda
+        d: Toad
+     - question: There are no extant reptile species capable of flight
+       difficulty: 4
+       answer: b
+       answers:
+        a: True
+        b: False
+     - question: Reptiles live on every continent
+       difficulty: 5
+       answer: b
+       answers:
+        a: True
+        b: False
+  - category:
+    title: Random
+    questions:
+     - question: Placeholder
+       difficulty: 1
+       answer: b
+       answers:
+        a: True
+        b: False
+     - question: Placeholder
+       difficulty: 2
+       answer: a
+       answers:
+        a: True
+        b: False
+     - question: Placeholder
+       difficulty: 3
+       answer: a
+       answers:
+        a: True
+        b: False
+     - question: Placeholder
+       difficulty: 4
+       answer: b
+       answers:
+        a: True
+        b: False
+     - question: Placeholder
+       difficulty: 5
+       answer: b
+       answers:
+        a: True
+        b: False

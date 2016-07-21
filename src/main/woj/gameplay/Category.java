@@ -3,16 +3,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Category {
-	public QuestionCollection questionSet;
+	public QuestionCollection questionCollection;
 	public String title;
 
 	public Category(String title, QuestionCollection questions){
 		this.title = title;
-		this.questionSet = questions;
+		this.questionCollection = questions;
 	}
 	
 	public QuestionCollection questions(){
-		return questionSet;
+		return questionCollection;
 	}
 	
 	public String title(){
@@ -20,9 +20,9 @@ public class Category {
 	}
 	
 	public String toString(){
-		String returnVal = title() + "\n";
-		for(int i=0;i<questionSet.length();i++){
-			returnVal += questionSet.get(i).toString() + "\n\n";
+		String returnVal = "Category: " + title() + "\n";
+		for(int i=0;i<questionCollection.length();i++){
+			returnVal += questionCollection.get(i).toString() + "\n\n";
 		}
 		return returnVal;
 	}
@@ -31,5 +31,13 @@ public class Category {
 		String title = (String) questionSet.get("title");
 		QuestionCollection questions = QuestionCollection.build((ArrayList<HashMap<String, Object>>) questionSet.get("questions"));
 		return new Category(title, questions);
+	}
+
+	public Question nextQuestion(){
+		return questionCollection.next();
+	}
+	
+	public boolean hasNext(){
+		return questionCollection.hasNext();
 	}
 }
