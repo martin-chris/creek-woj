@@ -1,0 +1,73 @@
+game:
+  - category:
+    title: Math
+    questions:
+     - question: What is 1+1?
+       answer: b
+       answers:
+        a: 1
+        b: 2
+        c: 3
+        d: 4
+     - question: What is 2+2?
+       answer: d
+       answers:
+        a: 1
+        b: 2
+        c: 3
+        d: 4
+     - question: What is 1*1?
+       answer: a
+       answers:
+        a: 1
+        b: 2
+        c: 3
+        d: 4
+     - question: What is 1*2?
+       answer: b
+       answers:
+        a: 1
+        b: 2
+        c: 3
+        d: 4
+     - question: What is 2*2?
+       answer: d
+       answers:
+        a: 1
+        b: 2
+        c: 3
+        d: 4
+  - category:
+    title: Geography
+    questions:
+     - question: Alaska is a Russian territory 
+       answer: b
+       answers:
+        a: true
+        b: false
+     - question: The United States is considered part of Latin America
+       answer: b
+       answers:
+        a: true
+        b: false
+     - question: What is the capital of California?
+       answer: b
+       answers:
+        a: San Francisco
+        b: Sacramento
+        c: Los Angeles
+        d: Los Gatos
+     - question: What is the smallest US state by population?
+       answer: c
+       answers:
+        a: New York
+        b: South Dakota
+        c: Wyoming
+        d: Maine
+     - question: What is the largest state by land mass?
+       answer: d
+       answers:
+        a: Texas
+        b: California
+        c: Florida
+        d: Alaska
