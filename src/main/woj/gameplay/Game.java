@@ -122,7 +122,6 @@ public class Game {
 	}
 	
 	private void handleSpinAgain() {
-		getCurrentPlayer().incrementExtraTurnsCounter();
 		handleSpinResult(wheel.spin());//spin again
 	}
 
