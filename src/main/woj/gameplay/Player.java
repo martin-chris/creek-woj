@@ -13,9 +13,9 @@ class Player
 	private int missedQuestionsCounter;
 	
 	//Class Constructors
-	public Player()
+	public Player(String firstName)
 	{
-		this.firstName = "";
+		this.firstName = firstName;
 		this.lastName = "";
 		this.gameScore = 0;
 		this.playersTurnFlag = false;
@@ -61,10 +61,12 @@ class Player
 	public void setCorrectQuestionsCounter(int correctQuestionsCounter){this.correctQuestionsCounter = correctQuestionsCounter;}
 	public void setMissedQuestionsCounter(int missedQuestionsCounter){this.missedQuestionsCounter = missedQuestionsCounter;}
 	
-	//Action Methods
+	
 	public boolean makePlayerBankrupt(){this.gameScore = 0;return true;}
-	public void incrementPlayerScore(int scoreIncrease){this.gameScore += scoreIncrease;}
-	public void decrementPlayerScore(int scoreDecrease){this.gameScore -= scoreDecrease;}
+	
+	public void incrementExtraTurnsCounter(){this.extraTurnsCounter++;}
+	public void decrementExtraTurnsCounter(){this.extraTurnsCounter--;}
+	public void updatePlayerScore(int pointsEarned){this.gameScore += pointsEarned;}
 	public void incrementCorrectQuestionsCounter(){this.correctQuestionsCounter += 1;}
 	public void incrementMissedQuestionsCounter(){this.missedQuestionsCounter += 1;}
 }
