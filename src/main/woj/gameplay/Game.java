@@ -38,16 +38,16 @@ public class Game {
 		return turns >= TURNS_PER_ROUND;	
 	}
 	
-	public void takeTurn(){
+	private void takeTurn(){
 		printStatus();
 		handleSpinResult(wheel.spin());
 		turns++;
 	}
 	
-	public void printStatus(){
+	private void printStatus(){
 		try {
 			Thread.sleep(1000);
-			System.out.println("\nTurn: " + turns + " - " + getCurrentPlayer().getFirstName() + " ($"+ getCurrentPlayer().getGameScore() + ")" + " is spinning the wheel...");
+			System.out.println("\nTurn: " + turns + " - " + getCurrentPlayer().getName() + " ($"+ getCurrentPlayer().getGameScore() + ")" + " is spinning the wheel...");
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -57,14 +57,14 @@ public class Game {
 		return roundOneCompleted() ? ROUND_TWO_MULTIPLER : ROUND_ONE_MULTIPLER;
 	}
 	
-	public Boolean askQuestion(Question question){
+	private Boolean askQuestion(Question question){
 		System.out.println(question.ask());
 		System.out.print("Answer: ");
 		String answer = scanner.next();
 		return question.verifyAnswer(answer.trim()); 
 	}
 	
-	public void updatePlayerScore(Question question,Boolean isCorrect){
+	private void updatePlayerScore(Question question,Boolean isCorrect){
 		int questionValue = question.value(getMultiplier());
 		int pointsEarned = isCorrect ? questionValue : (-1*questionValue);
 		getCurrentPlayer().updatePlayerScore(pointsEarned);
@@ -73,7 +73,7 @@ public class Game {
 		System.out.println("Current earnings: $" + getCurrentPlayer().getGameScore());
 	}
 	
-	public void handleSpinResult(StaticCategory spinResult){
+	private void handleSpinResult(StaticCategory spinResult){
 		switch(spinResult){
 			case CATEGORY_1:
 			case CATEGORY_2:
@@ -110,7 +110,7 @@ public class Game {
 		}
 	}
 
-	public void handleQuestionSpin(StaticCategory spinResult){
+	private void handleQuestionSpin(StaticCategory spinResult){
 		Category category = categories.get(spinResult.ordinal());
 		promptNextQuestion(category);
 	}
