@@ -2,12 +2,9 @@ package main.woj.gameplay;
 class Player 
 {
 	//Class Data Members
-	private String firstName;
+	private String name;
 	private String lastName;
 	private int gameScore;
-	private boolean playersTurnFlag;
-	private boolean lostTurnFlag;
-	private boolean bankruptFlag;
 	private int extraTurnsCounter;
 	private int correctQuestionsCounter;
 	private int missedQuestionsCounter;
@@ -15,48 +12,31 @@ class Player
 	//Class Constructors
 	public Player(String firstName)
 	{
-		this.firstName = firstName;
-		this.lastName = "";
+		this.name = firstName;
 		this.gameScore = 0;
-		this.playersTurnFlag = false;
-		this.lostTurnFlag = false;
-		this.bankruptFlag = false;
 		this.extraTurnsCounter = 0;
 		this.correctQuestionsCounter = 0;
 		this.missedQuestionsCounter = 0;
 	}
 	
 	public Player(String firstName, String lastName, int gameScore, 
-		boolean playersTurnFlag, boolean lostTurnFlag, boolean bankruptFlag,
 		int extraTurnsCounter, int correctQuestionsCounter, int missedQuestionCounter)
 	{
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.name = firstName;
 		this.gameScore = gameScore;
-		this.playersTurnFlag = playersTurnFlag;
-		this.lostTurnFlag = lostTurnFlag;
-		this.bankruptFlag = bankruptFlag;
 		this.extraTurnsCounter = extraTurnsCounter;
 		this.missedQuestionsCounter = missedQuestionsCounter;
 	}
 	
 	//Getters and Setters
-	public String getFirstName(){return this.firstName;}
-	public String getLastName(){return this.lastName;}
+	public String getName(){return this.name;}
 	public int getGameScore(){return this.gameScore;}
-	public boolean isPlayersTurn(){return this.playersTurnFlag;}
-	public boolean playerLostTurn(){return this.lostTurnFlag;}
-	public boolean isBankrupt(){return this.bankruptFlag;}
 	public int getExtraTurnsCounter(){return this.extraTurnsCounter;}
 	public int getCorrectQuestionsCounter(){return this.correctQuestionsCounter;}
 	public int getMissedQuestionsCounter(){return this.missedQuestionsCounter;}
 	
-	public void setFirstName(String firstName){this.firstName = firstName;}
-	public void setLastName(String lastName){this.lastName = lastName;}
+	public void setName(String firstName){this.name = firstName;}
 	public void setGameScore(int gameScore){this.gameScore = gameScore;}
-	public void setPlayersTurnFlag(boolean playersTurnFlag){this.playersTurnFlag = playersTurnFlag;}
-	public void setLostTurnFlag(boolean lostTurnFlag){this.lostTurnFlag = lostTurnFlag;}
-	public void setBankruptFlag(boolean bankruptFlag){this.bankruptFlag = bankruptFlag;}
 	public void setExtraTurnsCounter(int extraTurnsCounter){this.extraTurnsCounter = extraTurnsCounter;}
 	public void setCorrectQuestionsCounter(int correctQuestionsCounter){this.correctQuestionsCounter = correctQuestionsCounter;}
 	public void setMissedQuestionsCounter(int missedQuestionsCounter){this.missedQuestionsCounter = missedQuestionsCounter;}
