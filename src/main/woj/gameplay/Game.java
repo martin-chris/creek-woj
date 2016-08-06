@@ -3,6 +3,7 @@ package main.woj.gameplay;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Observable;
 import java.util.Scanner;
 
 import com.esotericsoftware.yamlbeans.YamlException;
@@ -10,7 +11,7 @@ import com.esotericsoftware.yamlbeans.YamlException;
 import main.woj.gameplay.Wheel.StaticCategory;
 import main.woj.utils.QuestionDeserializer;
 
-public class Game {
+public class Game extends Observable{
 	private final int ROUND_ONE_MULTIPLER = 200;
 	private final int ROUND_TWO_MULTIPLER = 400;
 	private final int TURNS_PER_ROUND = 50;
