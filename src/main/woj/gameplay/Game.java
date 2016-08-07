@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Scanner;
+import java.util.Stack;
 
 import com.esotericsoftware.yamlbeans.YamlException;
 
@@ -21,6 +22,7 @@ public class Game extends Observable{
 	private ArrayList<Category> categories;
 	private int turns;
 	private Scanner scanner;
+	private Stack<Turn> turnCache;
 	
 	public Game(String questionSet){
 		initGame(questionSet);
@@ -29,20 +31,23 @@ public class Game extends Observable{
 	
 	public void play(){
 		System.out.println("Starting game...");
-
-		while(!roundOneCompleted()){
-			takeTurn();
-		}
+		//Reset values if necessary
+	}
+	
+	public Board getBoard(){
+		return board;
 	}
 	
 	private Boolean roundOneCompleted(){
 		return turns >= TURNS_PER_ROUND;	
 	}
 	
-	private void takeTurn(){
+	public void takeTurn(StaticCategory spinResult){
 		printStatus();
-		handleSpinResult(wheel.spin());
+		handleSpinResult(spinResult);
 		turns++;
+		this.setChanged();
+		notifyObservers();
 	}
 	
 	private void printStatus(){
@@ -65,15 +70,25 @@ public class Game extends Observable{
 		return question.verifyAnswer(answer.trim()); 
 	}
 	
-	private void updatePlayerScore(Question question,Boolean isCorrect){
+	private void updatePlayerScore(String categoryKey, Question question,Boolean isCorrect){
 		int questionValue = question.value(getMultiplier());
 		int pointsEarned = isCorrect ? questionValue : (-1*questionValue);
 		getCurrentPlayer().updatePlayerScore(pointsEarned);
+		
+		addTurnToCache(new Turn(categoryKey, question, isCorrect));
 
 		System.out.println("Your answer is " + (isCorrect ? "correct" : "incorrect") +". Updating value by $" + pointsEarned);
 		System.out.println("Current earnings: $" + getCurrentPlayer().getGameScore());
 	}
 	
+	private void addTurnToCache(Turn turn) {
+		turnCache.push(turn);
+	}
+	
+	public Turn getLastTurn(){
+		return turnCache.peek();
+	}
+
 	private void handleSpinResult(StaticCategory spinResult){
 		switch(spinResult){
 			case CATEGORY_1:
@@ -119,7 +134,7 @@ public class Game extends Observable{
 	private void promptNextQuestion(Category category) {
 		Question question = category.nextQuestion();
 		Boolean result = askQuestion(question);
-		updatePlayerScore(question, result);
+		updatePlayerScore(category.getTitle(), question, result);
 	}
 	
 	private void handleSpinAgain() {
@@ -174,6 +189,7 @@ public class Game extends Observable{
 	}
 	
 	private void initGame(String questionSet){
+		turnCache = new Stack();
 		turns = 0;
 		players = new ArrayList<Player>();
 		players.add(new Player("Player 1"));
@@ -185,5 +201,30 @@ public class Game extends Observable{
 		} catch (YamlException | FileNotFoundException e) {
 			e.printStackTrace();
 		} 
+	}
+	
+	public class Turn{
+		
+		private Boolean result;
+		private Question question;
+		private String categoryKey;
+
+		public Turn(String categoryKey, Question question, Boolean result){
+			this.categoryKey = categoryKey;
+			this.question = question;
+			this.result = result;
+		}
+		
+		public Category getCategory(){
+			return board.getCategory(categoryKey);
+		}
+		
+		public Question getQuestion(){
+			return question;
+		}
+		
+		public Boolean getResult(){
+			return result;
+		}
 	}
 }

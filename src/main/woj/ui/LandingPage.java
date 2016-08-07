@@ -15,8 +15,11 @@ public class LandingPage extends JPanel {
 	private GameplayPage gamePage;
 	private JButton aboutPageButton;
 	private JButton gamePageButton;
+	private GameFrame gameFrame;
 
-	public LandingPage(){
+	public LandingPage(GameFrame gameFrame){
+		this.gameFrame = gameFrame;
+		this.setBackground(Color.green);
 		setup();
 		initComponents();
 		initListeners();
@@ -41,10 +44,7 @@ public class LandingPage extends JPanel {
 	}
 
 	private void transitionToGame(){
-		this.removeAll();
-		this.repaint();
-		gamePage = new GameplayPage();
-		this.add(gamePage);
+		gameFrame.initNewGame();
 	}
 
 	private void initComponents() {

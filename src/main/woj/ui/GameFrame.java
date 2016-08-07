@@ -1,25 +1,51 @@
 package main.woj.ui;
 
+import java.awt.GridLayout;
+
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
+import main.woj.controllers.ActionController;
+import main.woj.gameplay.Game;
+import main.woj.gameplay.Game.Turn;
+
 public class GameFrame extends JFrame{
 	private LandingPage landingPage;
+	private GameplayPage gameplayPage;
+	private Game gameModel;
+	private ActionController controller;
 
-	public GameFrame(){
+	public GameFrame(ActionController controller){
 		super("Wheel of Jeopardy");
+		this.controller = controller;
+		this.gameModel = controller.getGame();
 		initComponents();
 		setup();
-		this.repaint();
+		this.validate();
 	}
 
 	private void initComponents() {
-		add(new LandingPage());
+		this.setLayout(new GridLayout(0,1));
+		landingPage = new LandingPage(this);
+		gameplayPage = new GameplayPage(this, controller);
+		add(landingPage);
 	}
 	
 	private void setup(){
-		this.setSize(800,600);
+		this.setSize(800, 600);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setVisible(true);
+	}
+
+	public void initNewGame() {
+		this.remove(landingPage);
+		this.add(gameplayPage);
+		this.validate();
+		this.repaint();
+		controller.startNewGame();
+	}
+
+	public void updateBoard(Turn lastTurn) {
+		this.gameplayPage.getBoard().answer(lastTurn.getCategory());
 	}
 }

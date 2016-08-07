@@ -40,4 +40,8 @@ public class Category {
 	public boolean hasNext(){
 		return questionCollection.hasNext();
 	}
+
+	public String getTitle() {
+		return title;
+	}
 }
