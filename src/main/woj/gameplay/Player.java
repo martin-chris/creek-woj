@@ -1,5 +1,5 @@
 package main.woj.gameplay;
-class Player 
+public class Player 
 {
 	//Class Data Members
 	private String name;

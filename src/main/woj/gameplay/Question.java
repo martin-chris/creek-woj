@@ -2,6 +2,7 @@ package main.woj.gameplay;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -23,6 +24,14 @@ public class Question implements Comparable<Question> {
 		return set;
 	}
 
+	public String getQuestion(){
+		return question;
+	}
+	
+	public Object[] getAnswerKey(){
+		return answers.keySet().toArray();
+	}
+	
 	public int value(int multiplier){
 		return difficulty * multiplier;
 	}

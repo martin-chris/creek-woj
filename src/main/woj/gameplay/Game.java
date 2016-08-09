@@ -42,21 +42,16 @@ public class Game extends Observable{
 		return turns >= TURNS_PER_ROUND;	
 	}
 	
-	public void takeTurn(StaticCategory spinResult){
+	public void takeTurn(){
 		printStatus();
-		handleSpinResult(spinResult);
+		//handleSpinResult(spinResult);
 		turns++;
 		this.setChanged();
 		notifyObservers();
 	}
 	
 	private void printStatus(){
-		try {
-			Thread.sleep(1000);
-			System.out.println("\nTurn: " + turns + " - " + getCurrentPlayer().getName() + " ($"+ getCurrentPlayer().getGameScore() + ")" + " is spinning the wheel...");
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		System.out.println("\nTurn: " + turns + " - " + getCurrentPlayer().getName() + " ($"+ getCurrentPlayer().getGameScore() + ")" + " just finished spinning the wheel...");
 	}
 	
 	private int getMultiplier(){
@@ -126,7 +121,21 @@ public class Game extends Observable{
 		}
 	}
 
-	private void handleQuestionSpin(StaticCategory spinResult){
+	public Question getNextQuestion(StaticCategory spinResult){
+		Category category = categories.get(spinResult.ordinal());
+		return category.nextQuestion();
+	}
+	
+	public String getCategoryKey(StaticCategory spinResult){
+		return categories.get(spinResult.ordinal()).title();
+	}
+	
+	public void answerQuestion(String categoryKey, Question question, String response){
+		Boolean correct = question.verifyAnswer(response);
+		updatePlayerScore(categoryKey, question, correct);
+	}
+	
+	public void handleQuestionSpin(StaticCategory spinResult){
 		Category category = categories.get(spinResult.ordinal());
 		promptNextQuestion(category);
 	}
@@ -137,16 +146,16 @@ public class Game extends Observable{
 		updatePlayerScore(category.getTitle(), question, result);
 	}
 	
-	private void handleSpinAgain() {
-		handleSpinResult(wheel.spin());//spin again
+	public void handleSpinAgain() {
+		//handleSpinResult(wheel.spin());//spin again
 	}
 
-	private void handleOpponentChoice() {
+	public void handleOpponentChoice() {
 		Category category = promptForCategorySelection();
 		promptNextQuestion(category);	
 	}
 
-	private void handlePlayerChoice() {
+	public void handlePlayerChoice() {
 		Category category = promptForCategorySelection();
 		promptNextQuestion(category); 
 	}
@@ -167,24 +176,24 @@ public class Game extends Observable{
 		}
 	}
 	
-	private void handleBankrupt() {
+	public void handleBankrupt() {
 		getCurrentPlayer().makePlayerBankrupt();
 	}
 
-	private void handleLoseTurn() {
+	public void handleLoseTurn() {
 		//Spin again if player has extra turns
 		if(getCurrentPlayer().getExtraTurnsCounter() > 0){
 			getCurrentPlayer().decrementExtraTurnsCounter();
-			handleSpinResult(wheel.spin());//spin again
+			//handleSpinResult(wheel.spin());//spin again
 		}
 	}
 	
-	private void handleFreeTurn() {
+	public void handleFreeTurn() {
 		getCurrentPlayer().incrementExtraTurnsCounter();
-		handleSpinResult(wheel.spin());//spin again
+		//handleSpinResult(wheel.spin());//spin again
 	}
 
-	private Player getCurrentPlayer(){
+	public Player getCurrentPlayer(){
 		return players.get(turns % players.size());
 	}
 	
@@ -226,5 +235,9 @@ public class Game extends Observable{
 		public Boolean getResult(){
 			return result;
 		}
+	}
+
+	public ArrayList<Category> getCategories() {
+		return categories;
 	}
 }

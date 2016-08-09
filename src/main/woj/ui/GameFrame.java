@@ -47,5 +47,18 @@ public class GameFrame extends JFrame{
 
 	public void updateBoard(Turn lastTurn) {
 		this.gameplayPage.getBoard().answer(lastTurn.getCategory());
+		this.repaint();
+	}
+	
+	public void showBoard(){
+		gameplayPage.showBoard();
+		validate();
+		repaint();
+	}
+	
+	public void showWheel(){
+		gameplayPage.showWheel();
+		validate();
+		repaint();
 	}
 }

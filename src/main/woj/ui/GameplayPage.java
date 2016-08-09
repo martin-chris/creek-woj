@@ -12,12 +12,11 @@ import main.woj.gameplay.Board;
 import main.woj.gameplay.Game;
 
 public class GameplayPage extends JPanel{
-	private GameWheel wheel;
 	private ScoreBoard scoreBoard;
 	private QuestionPanel questionPanel;
 	private ActionIndicator actionIndicator;
-	private GameBoard board;
 	private GameFrame gameFrame;
+	private GameplayContainer gameplayContainer;
 	private ActionController controller;
 	
 	public GameplayPage(GameFrame gameFrame, ActionController controller){
@@ -33,25 +32,31 @@ public class GameplayPage extends JPanel{
 	}
 
 	private void initComponents() {
-		wheel = new GameWheel(controller);
-		board = new GameBoard(controller);
+		gameplayContainer = new GameplayContainer(controller);
 		scoreBoard = new ScoreBoard();
 		actionIndicator = new ActionIndicator();
 		scoreBoard = new ScoreBoard();
-		this.add(board, BorderLayout.CENTER);
+		this.add(gameplayContainer, BorderLayout.CENTER);
 		this.add(bottomPanel(), BorderLayout.SOUTH);
 	}
 	
+	public void showBoard(){
+		gameplayContainer.switchToBoard();
+	}
+	
+	public void showWheel(){
+		gameplayContainer.switchToWheel();
+	}
+	
 	public GameBoard getBoard(){
-		return board;
+		return gameplayContainer.getBoard();
 	}
 	
 	private JPanel bottomPanel(){
 		JPanel bottomPanel = new JPanel();
-		bottomPanel.setLayout(new GridLayout(1,3));
+		bottomPanel.setLayout(new GridLayout(1,2));
 		bottomPanel.add(scoreBoard);
 		bottomPanel.add(actionIndicator);
-		bottomPanel.add(wheel);
 		return bottomPanel;
 	}
 	
