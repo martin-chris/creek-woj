@@ -1,6 +1,8 @@
 package main.woj.ui;
 
 import java.awt.GridLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -70,6 +72,9 @@ public class GameBoard extends JPanel{
 		
 		private JButton createNewButton(int value){
 			JButton button = new JButton("$" + value );
+			button.setFont(button.getFont().deriveFont(Font.BOLD));
+			button.setForeground(Color.YELLOW);
+			button.setBackground(Color.BLUE);
 			questions.add(button);
 			return button;
 		}
