@@ -81,7 +81,13 @@ public class Game extends Observable{
 	}
 	
 	public Turn getLastTurn(){
-		return turnCache.peek();
+		if (turnCache.empty()){
+			//prevents it from breaking. 
+			return null;
+		}
+		else{
+			return turnCache.peek();
+		}
 	}
 
 	private void handleSpinResult(StaticCategory spinResult){

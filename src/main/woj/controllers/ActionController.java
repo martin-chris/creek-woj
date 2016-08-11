@@ -67,24 +67,32 @@ public class ActionController implements Observer {
 				promptNextQuestion(spinResult);
 				break;
 			case LOSE_TURN:
-				System.out.println("Lost your turn!");
+				JOptionPane.showMessageDialog(gameFrame, "Lost your turn!");
+				//System.out.println("Lost your turn!");
 				handleLoseTurn(spinResult);
 				break;
 			case FREE_TURN:
-				System.out.println("Free turn!");
+				JOptionPane.showMessageDialog(gameFrame, "Free turn!");
+				//System.out.println("Free turn!");
 				handleFreeTurn();
 				break;
 			case BANKRUPT:
-				System.out.println("Bankrupt!");
+				JOptionPane.showMessageDialog(gameFrame, "Bankrupt!");
+				//System.out.println("Bankrupt!");
 				handleBankrupt();
 				break;
 			case OPPONENT_CHOICE:
+				JOptionPane.showMessageDialog(gameFrame, "Opponent's Choice!");
+				handlePlayerChoice();
+				break;
 			case PLAYER_CHOICE:
-				System.out.println("Player Choice!");
+				JOptionPane.showMessageDialog(gameFrame, "Player Choice!");
+				//System.out.println("Player Choice!");
 				handlePlayerChoice();
 				break;
 			case SPIN_AGAIN:
-				System.out.println("Spin again!");
+				JOptionPane.showMessageDialog(gameFrame, "Spin Again!");
+				//System.out.println("Spin again!");
 				handleSpinAgain();
 				break;
 		}
