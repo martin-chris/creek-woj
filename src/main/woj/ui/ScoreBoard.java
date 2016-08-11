@@ -29,7 +29,9 @@ public class ScoreBoard extends JPanel{
 	private static int player1Score;
 	private static int player2Score; 
 	private static String currentWinner; 
-	private static int currentWinnerScore; 
+	private static int currentWinnerScore;
+	private static int player2Tokens;
+	private static int player1Tokens; 
 	
 	public static void showScoreBoard(Game gameModel) 
 	{
@@ -37,6 +39,8 @@ public class ScoreBoard extends JPanel{
 		player2Name = gameModel.getPlayer2Information().getName();
 		player1Score = gameModel.getPlayer1Information().getGameScore(); 
 		player2Score = gameModel.getPlayer2Information().getGameScore(); 
+		player1Tokens = gameModel.getPlayer1Information().getExtraTurnsCounter();
+		player2Tokens = gameModel.getPlayer2Information().getExtraTurnsCounter();
 		currentWinner = ""; 
 		currentWinnerScore = 0; 
 		
@@ -58,11 +62,13 @@ public class ScoreBoard extends JPanel{
 		
 		
 		String mainMessage = "Player 1 Information" + "\n" + "Name: " + player1Name + "\n" + "Score: " + Integer.toString(player1Score)
+			+ "\n" + "Tokens: " + Integer.toString(player1Tokens) 
 			+ "\n" + "\n" + "Player 2 Information" + "\n" + "Name: " + player2Name + "\n" + "Score: " + Integer.toString(player2Score)
+			+ "\n" + "Tokens: " + Integer.toString(player2Tokens)
 			+ "\n" + "\n" + "Current Winner Information" + "\n" + "Name: " + currentWinner + "\n" + "Score: " + Integer.toString(currentWinnerScore)
 			; 
 		
-		JOptionPane.showMessageDialog(null, mainMessage,"Score Board", 1);	
+		JOptionPane.showMessageDialog(null, mainMessage,"Score Board", 1);		
 	}
 }
 
