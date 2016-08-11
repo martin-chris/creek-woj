@@ -12,7 +12,7 @@ import main.woj.gameplay.Game.Turn;
 public class GameFrame extends JFrame{
 	private LandingPage landingPage;
 	private GameplayPage gameplayPage;
-	private Game gameModel;
+	Game gameModel;
 	private ActionController controller;
 
 	public GameFrame(ActionController controller){

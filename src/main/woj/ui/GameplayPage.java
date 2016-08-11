@@ -3,8 +3,12 @@ package main.woj.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import main.woj.controllers.ActionController;
@@ -18,12 +22,23 @@ public class GameplayPage extends JPanel{
 	private GameFrame gameFrame;
 	private GameplayContainer gameplayContainer;
 	private ActionController controller;
+	private JLabel emptyLabel;
+	private JButton scoreBoardButton;
 	
 	public GameplayPage(GameFrame gameFrame, ActionController controller){
 		this.gameFrame = gameFrame;
 		this.controller = controller;
 		setup();
 		initComponents();
+		initListeners();
+	}
+	
+	private void initListeners() {
+		scoreBoardButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {	
+				ScoreBoard.showScoreBoard(gameFrame.gameModel);
+			}
+        });
 	}
 
 	private void setup() {
@@ -33,9 +48,11 @@ public class GameplayPage extends JPanel{
 
 	private void initComponents() {
 		gameplayContainer = new GameplayContainer(controller);
-		scoreBoard = new ScoreBoard();
+		//scoreBoard = new ScoreBoard();
+		scoreBoardButton = new JButton("Score");
+		emptyLabel = new JLabel("");
 		actionIndicator = new ActionIndicator();
-		scoreBoard = new ScoreBoard();
+		//scoreBoard = new ScoreBoard();
 		this.add(gameplayContainer, BorderLayout.CENTER);
 		this.add(bottomPanel(), BorderLayout.SOUTH);
 	}
@@ -54,8 +71,10 @@ public class GameplayPage extends JPanel{
 	
 	private JPanel bottomPanel(){
 		JPanel bottomPanel = new JPanel();
-		bottomPanel.setLayout(new GridLayout(1,2));
-		bottomPanel.add(scoreBoard);
+		bottomPanel.setLayout(new GridLayout(1,3));
+		bottomPanel.add(scoreBoardButton);
+		bottomPanel.add(emptyLabel);
+		//bottomPanel.add(scoreBoard);
 		bottomPanel.add(actionIndicator);
 		return bottomPanel;
 	}
