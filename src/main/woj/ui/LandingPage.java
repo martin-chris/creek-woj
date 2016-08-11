@@ -33,6 +33,7 @@ public class LandingPage extends JPanel {
         //Process the Apply gaps button press
 		aboutPageButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {	
+				AboutPage.showAbout();
 			}
         });
 		
