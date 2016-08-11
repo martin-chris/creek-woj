@@ -1,9 +1,11 @@
 package main.woj.ui;
 
-import java.awt.GridLayout;
-
-import javax.swing.JLabel;
+//import java.awt.GridLayout;
+//import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import main.woj.gameplay.Game;
 
 public class ScoreBoard extends JPanel{
 	// private JLabel label;
