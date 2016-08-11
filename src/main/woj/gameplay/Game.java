@@ -193,6 +193,16 @@ public class Game extends Observable{
 		//handleSpinResult(wheel.spin());//spin again
 	}
 
+	public Player getPlayer1Information()
+	{
+		return players.get(0);
+	}
+	
+	public Player getPlayer2Information()
+	{
+		return players.get(1);
+	}
+	
 	public Player getCurrentPlayer(){
 		return players.get(turns % players.size());
 	}
