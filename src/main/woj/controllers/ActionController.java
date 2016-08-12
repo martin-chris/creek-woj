@@ -4,7 +4,11 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
 
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import main.woj.gameplay.Board;
 import main.woj.gameplay.Category;
@@ -147,18 +151,50 @@ public class ActionController implements Observer {
 
 	
 	private Category promptForCategorySelection(){
-		System.out.println("Choose a category:");
+		String[] buttons = {"Ok"};
+		JPanel panel = new JPanel(); 
+		String titles = ""; 
 		for (Category category : gameModel.getCategories()){
-			System.out.println(category.title());
-		}
-		System.out.print("Category: ");
-		String categoryTitle = scanner.next();
+			titles += category.title() + "; ";
 
-		if( gameModel.getBoard().hasCategory(categoryTitle) ){
-			return gameModel.getBoard().getCategory(categoryTitle);
-		}else{
-			//recursively call self until user inputs expected value
+		}
+		JLabel label = new JLabel("<html>Enter one of the following categories: <br>" + titles + "<br> </html>" );
+		JTextField text = new JTextField(10); 
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.add(label);
+		panel.add(text);
+		int selectedOption = JOptionPane.showOptionDialog(null, panel, "Choose a category:", 
+				JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons , buttons[0]);
+
+		if(selectedOption == 0)
+		{
+		    String userInput = text.getText();
+		    if (gameModel.getBoard().hasCategory(userInput))
+		    {
+		    	return gameModel.getBoard().getCategory(userInput);
+		    }
+		    else
+		    {
+		    	return promptForCategorySelection();
+		    }
+		} 
+		else
+		{
 			return promptForCategorySelection();
 		}
+		
+//		System.out.println("Choose a category:");
+//		for (Category category : gameModel.getCategories()){
+//			System.out.println(category.title());
+//		}
+//		System.out.print("Category: ");
+//		String categoryTitle = scanner.next();
+//
+//		if( gameModel.getBoard().hasCategory(categoryTitle) ){
+//			return gameModel.getBoard().getCategory(categoryTitle);
+//		}else{
+//			//recursively call self until user inputs expected value
+//			return promptForCategorySelection();
+//		}
 	}
 }
