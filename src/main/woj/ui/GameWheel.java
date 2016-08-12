@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.*;
+
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -19,25 +21,33 @@ public class GameWheel extends JPanel{
 	private JLabel resultsLabel;
 	private JButton spinButton;
 	private ActionController controller;
+	private WheelPanel  wheelWidget;
+			
 	public GameWheel(ActionController controller){
 		this.controller = controller;
 		this.wheelModel = new Wheel();
+
 		setup();
 		initComponents();
 		setupListeners();
 	}
 	
+	
 	private void initComponents() {
 		resultsLabel = new JLabel("");
-		spinButton = new JButton("Spin");
+		spinButton = new JButton("Spin Wheel");
+		wheelWidget = new WheelPanel();
+		add(wheelWidget);
 		add(resultsLabel);
 		add(spinButton);
+
 	}
 
 	private void setup() {
 		this.setSize(this.getMaximumSize());
-		this.setLayout(new GridLayout(2,1));
-		setBorder(new EmptyBorder(200, 200, 200, 200));
+		this.setLayout(new GridLayout(3,1));
+		setBorder(new EmptyBorder(20, 20, 20, 20));
+		
 	}
 	
 	private void setupListeners(){
@@ -50,5 +60,55 @@ public class GameWheel extends JPanel{
 	
 	private void spinWheel() {
 		this.controller.startNewTurn(wheelModel.spin());
+	}
+	
+	
+	private class WheelPanel extends JPanel{
+		private Color[] wheelColor;
+
+		public WheelPanel(){
+			wheelColor = new Color[12];
+
+			setup();
+			initComponents();
+		}
+		public void paint(Graphics g) {
+			Graphics2D g2 = (Graphics2D) g;
+			
+			g2.rotate(Math.toRadians(15));
+
+			for(int i = 0; i < 12; i++){
+				g2.setColor(wheelColor[i]);
+			    g2.fillArc (0, 0, 200, 200, 30*i, 30); 
+			}
+			g2.setColor(Color.GRAY);
+			g2.fillArc(300+74, 50+74, 50, 50, 0, 360);
+
+	    }	
+
+
+		private void setup() {	
+
+			wheelColor[0] = Color.YELLOW;
+			wheelColor[1] = Color.GREEN;
+			wheelColor[2] = Color.CYAN;
+			wheelColor[3] = Color.ORANGE;
+			wheelColor[4] = Color.PINK;
+			wheelColor[5] = Color.RED;
+			wheelColor[6] = Color.YELLOW;
+			wheelColor[7] = Color.GREEN;
+			wheelColor[8] = Color.CYAN;
+			wheelColor[9] = Color.ORANGE;
+			wheelColor[10] = Color.PINK;
+			wheelColor[11] = Color.RED;
+			
+			this.getMaximumSize();
+		}
+
+		private void initComponents() {
+		}
+
+		private void setupListeners(){
+		}
 	}
 }

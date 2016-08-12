@@ -58,6 +58,7 @@ public class GameBoard extends JPanel{
 		}
 		
 		public void answer(){
+			questions.get(answered).setText("");
 			questions.get(answered).setEnabled(false);
 			answered++;
 		}
