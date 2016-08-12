@@ -45,7 +45,7 @@ public class GameWheel extends JPanel{
 
 	private void setup() {
 		this.setSize(this.getMaximumSize());
-		this.setLayout(new GridLayout(3,1));
+		this.setLayout(new GridLayout(1,1));
 		setBorder(new EmptyBorder(20, 20, 20, 20));
 		
 	}
@@ -75,14 +75,14 @@ public class GameWheel extends JPanel{
 		public void paint(Graphics g) {
 			Graphics2D g2 = (Graphics2D) g;
 			
-			g2.rotate(Math.toRadians(15));
+			//g2.rotate(Math.toRadians(15));
 
 			for(int i = 0; i < 12; i++){
 				g2.setColor(wheelColor[i]);
-			    g2.fillArc (0, 0, 200, 200, 30*i, 30); 
+			    g2.fillArc (0, 0, getWidth(), getHeight(), 30*i, 30); 
 			}
 			g2.setColor(Color.GRAY);
-			g2.fillArc(300+74, 50+74, 50, 50, 0, 360);
+			g2.fillArc(3*getWidth()/8, 3*getHeight()/8, getWidth()/4, getHeight()/4, 0, 360);
 
 	    }	
 
