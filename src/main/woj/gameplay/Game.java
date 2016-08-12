@@ -167,6 +167,7 @@ public class Game extends Observable{
 	}
 
 	private Category promptForCategorySelection(){
+		//This is not used. The one being used is in action controller.
 		System.out.println("Choose a category:");
 		for (Category category : categories){
 			System.out.println(category.title());
