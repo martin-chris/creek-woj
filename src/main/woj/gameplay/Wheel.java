@@ -5,6 +5,8 @@ import java.util.Random;
 
 public class Wheel {
 	private Random random;
+	private int spinCount;
+
 	public enum StaticCategory {
 		CATEGORY_1,
 		CATEGORY_2,
@@ -21,10 +23,12 @@ public class Wheel {
 	}
 	
 	public Wheel(){
+		spinCount = 0;
 		this.random = new Random();
 	}
 	
 	public StaticCategory spin(){
+		spinCount++;
 		return getRandomCategory();
 	}
 	
@@ -34,5 +38,9 @@ public class Wheel {
 	
 	private int generateSpin(){
 		return random.nextInt(StaticCategory.values().length);
+	}
+
+	public int getNumSpins() {
+		return spinCount;
 	}
 }

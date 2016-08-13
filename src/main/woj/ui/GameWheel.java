@@ -102,7 +102,7 @@ public class GameWheel extends JPanel{
 	}
 	
 	private void spinWheel() {
-		this.controller.startNewTurn(wheelModel.spin());
+		this.controller.handleSpin(wheelModel.spin(), wheelModel.getNumSpins());
 	}
 	
 	

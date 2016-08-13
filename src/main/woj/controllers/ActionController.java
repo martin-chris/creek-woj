@@ -21,19 +21,21 @@ import main.woj.ui.QuestionDialog;
 public class ActionController implements Observer {
 	private Game gameModel;
 	private GameFrame gameFrame;
-	private Scanner scanner;
 	public ActionController(String questionSet){
 		gameModel = new Game(questionSet);
 		gameFrame = new GameFrame(this);
 		gameModel.addObserver(this);
-		scanner = new Scanner(System.in);
+		gameFrame.updateScore();
+		gameFrame.updateActionIndicator();
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		//Called after each turn
 		if (gameModel.getLastTurn() != null){
-			gameFrame.updateBoard(gameModel.getLastTurn());
+			gameFrame.updateBoard();
+			gameFrame.updateScore();
+			gameFrame.updateActionIndicator();
 		}
 	}
 	
@@ -54,7 +56,8 @@ public class ActionController implements Observer {
 		
 	}
 	
-	public void startNewTurn(StaticCategory spinResult){
+	public void handleSpin(StaticCategory spinResult, int spinCount){
+		gameFrame.updateSpinCount(spinCount);
 		delegateSpinResultAction(spinResult);
 		promptSpin();
 	}

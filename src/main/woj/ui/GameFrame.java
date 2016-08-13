@@ -8,6 +8,7 @@ import javax.swing.WindowConstants;
 import main.woj.controllers.ActionController;
 import main.woj.gameplay.Game;
 import main.woj.gameplay.Game.Turn;
+import main.woj.gameplay.Player;
 
 public class GameFrame extends JFrame{
 	private LandingPage landingPage;
@@ -19,8 +20,8 @@ public class GameFrame extends JFrame{
 		super("Wheel of Jeopardy");
 		this.controller = controller;
 		this.gameModel = controller.getGame();
-		initComponents();
 		setup();
+		initComponents();
 		this.validate();
 	}
 
@@ -45,7 +46,8 @@ public class GameFrame extends JFrame{
 		controller.startNewGame();
 	}
 
-	public void updateBoard(Turn lastTurn) {
+	public void updateBoard() {
+		Turn lastTurn = gameModel.getLastTurn();
 		this.gameplayPage.getBoard().answer(lastTurn.getCategory());
 		this.repaint();
 	}
@@ -60,5 +62,18 @@ public class GameFrame extends JFrame{
 		gameplayPage.showWheel();
 		validate();
 		repaint();
+	}
+
+	public void updateScore() {
+		gameplayPage.getScoreboard().updateScore(gameModel.getPlayer1Information(), gameModel.getPlayer2Information());
+		
+	}
+
+	public void updateSpinCount(int spinCount) {
+		gameplayPage.updateSpinCount(spinCount);
+	}
+	
+	public void updateActionIndicator(){
+		this.gameplayPage.updateActionIndicator(gameModel);
 	}
 }
