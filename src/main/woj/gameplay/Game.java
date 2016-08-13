@@ -7,6 +7,12 @@ import java.util.Observable;
 import java.util.Scanner;
 import java.util.Stack;
 
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 import com.esotericsoftware.yamlbeans.YamlException;
 
 import main.woj.gameplay.Wheel.StaticCategory;
@@ -218,8 +224,19 @@ public class Game extends Observable{
 		turnCache = new Stack();
 		turns = 0;
 		players = new ArrayList<Player>();
-		players.add(new Player("Player 1"));
-		players.add(new Player("Player 2"));
+		JOptionPane.showMessageDialog(null, "<html>Welcome to the Wheel of Jeopardy. "
+				+ "<br>Before the game begins, please enter the player's names. </html>");
+		String player1Name, player2Name; 
+		String displayPlayer1NameRequest = "Enter Player 1's Name: "; 
+		String displayPlayer2NameRequest = "Enter Player 2's Name: ";
+		
+		player1Name = promptForPlayerName(displayPlayer1NameRequest);
+		//System.out.println(player1Name);
+		player2Name = promptForPlayerName(displayPlayer2NameRequest);
+		//System.out.println(player2Name);
+		
+		players.add(new Player(player1Name));
+		players.add(new Player(player2Name));
 		try {
 			categories = QuestionDeserializer.importQuestionSet(questionSet);
 			wheel = new Wheel();
@@ -227,6 +244,39 @@ public class Game extends Observable{
 		} catch (YamlException | FileNotFoundException e) {
 			e.printStackTrace();
 		} 
+	}
+	
+	private String promptForPlayerName(String requestPrompt)
+	{
+		String[] buttons = {"Ok"};
+		JPanel panel = new JPanel();
+		String playerName = "";
+		JLabel label = new JLabel(requestPrompt); 
+		JTextField text = new JTextField(10); 
+		panel.setLayout(new BoxLayout (panel, BoxLayout.Y_AXIS));
+		panel.add(label);
+		panel.add(text);
+		
+		int selectedOption = JOptionPane.showOptionDialog(null, panel, requestPrompt, 
+				JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons , buttons[0]);
+
+		if(selectedOption == 0)
+		{
+		    String userInput = text.getText();
+		    if (userInput.isEmpty() || userInput == null || userInput.trim().length() == 0 )
+		    {
+		    	return promptForPlayerName(requestPrompt);
+		    }
+		    else
+		    {
+		    	playerName = userInput;
+		    	return playerName; 
+		    }
+		} 
+		else
+		{
+			return promptForPlayerName(requestPrompt);
+		}	
 	}
 	
 	public class Turn{
