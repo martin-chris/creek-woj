@@ -4,10 +4,15 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.awt.*;
 
-
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -37,7 +42,45 @@ public class GameWheel extends JPanel{
 		resultsLabel = new JLabel("");
 		spinButton = new JButton("Spin Wheel");
 		wheelWidget = new WheelPanel();
-		add(wheelWidget);
+		
+		
+		
+		BufferedImage myPicture;
+		try {
+			myPicture = ImageIO.read(new File("lib/wheeloffortune-35133.png"));
+			
+            double radians = Math.toRadians(90);
+            double sin = Math.abs(Math.sin(radians));
+            double cos = Math.abs(Math.cos(radians));
+            int newWidth = (int)Math.round(myPicture.getWidth() * cos + myPicture.getHeight() * sin);
+            int newHeight = (int)Math.round(myPicture.getWidth() * sin + myPicture.getHeight() * cos);
+
+			
+            BufferedImage rotate = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g2d = rotate.createGraphics();
+
+            
+            //Graphics2D g2d = myPicture.createGraphics();
+            int x = (newWidth - myPicture.getWidth()) / 2;
+            int y = (newHeight - myPicture.getHeight()) / 2;
+            AffineTransform at = new AffineTransform();
+            at.setToRotation(radians, x + (myPicture.getWidth() / 2), y + (myPicture.getHeight() / 2));
+
+            at.translate(x, y);
+            g2d.setTransform(at);
+            g2d.drawImage(myPicture, 0, 0, this);
+            g2d.dispose();
+
+			
+			//JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+			JLabel picLabel = new JLabel(new ImageIcon(rotate));
+			add(picLabel);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		//add(wheelWidget);
 		add(resultsLabel);
 		add(spinButton);
 
@@ -45,8 +88,8 @@ public class GameWheel extends JPanel{
 
 	private void setup() {
 		this.setSize(this.getMaximumSize());
-		this.setLayout(new GridLayout(1,1));
-		setBorder(new EmptyBorder(20, 20, 20, 20));
+		//this.setLayout(new GridLayout(1,3));
+		setBorder(new EmptyBorder(10, 10, 10, 10));
 		
 	}
 	
@@ -74,15 +117,31 @@ public class GameWheel extends JPanel{
 		}
 		public void paint(Graphics g) {
 			Graphics2D g2 = (Graphics2D) g;
+			int diameter;
 			
+			//Calc diameter of wheel
+			diameter = getWidth();
+			if(diameter > getHeight())
+			{
+				diameter = getHeight();
+			}
 			//g2.rotate(Math.toRadians(15));
 
 			for(int i = 0; i < 12; i++){
 				g2.setColor(wheelColor[i]);
-			    g2.fillArc (0, 0, getWidth(), getHeight(), 30*i, 30); 
+			    //g2.fillArc (0, 0, diameter, diameter, 30*i - 15, 30); 
+				g2.fillArc (0, 0, diameter, diameter, -15, 30);
+			    
+			    g2.setColor(Color.BLACK);
+			    g2.drawString("Math", 3*diameter/4, diameter/2);
+			    
+			    //g2.rotate(Math.toRadians(30));
+
 			}
 			g2.setColor(Color.GRAY);
-			g2.fillArc(3*getWidth()/8, 3*getHeight()/8, getWidth()/4, getHeight()/4, 0, 360);
+			g2.fillArc(3*diameter/8, 3*diameter/8, diameter/4, diameter/4, 0, 360);
+			
+
 
 	    }	
 
