@@ -151,33 +151,51 @@ public class ActionController implements Observer {
 
 	
 	private Category promptForCategorySelection(){
-		String[] buttons = {"Ok"};
 		JPanel panel = new JPanel(); 
-		String titles = ""; 
-		for (Category category : gameModel.getCategories()){
-			titles += category.title() + "; ";
-
-		}
-		JLabel label = new JLabel("<html>Enter one of the following categories: <br>" + titles + "<br> </html>" );
-		JTextField text = new JTextField(10); 
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.add(label);
-		panel.add(text);
-		int selectedOption = JOptionPane.showOptionDialog(null, panel, "Choose a category:", 
-				JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons , buttons[0]);
-
-		if(selectedOption == 0)
+		//This for loop is to set the number of button selections
+		int numCategory = 0; 
+		for (Category category : gameModel.getCategories())
 		{
-		    String userInput = text.getText();
-		    if (gameModel.getBoard().hasCategory(userInput))
+			if (category.questionCollection.hasNext())
+			{
+				numCategory++;
+			}
+		}
+		String [] titles = new String [numCategory]; 
+		//This for loop is to label the button selections
+		int countTitles = 0; 
+		for (Category category : gameModel.getCategories()){
+			if (category.questionCollection.hasNext())
+			{
+				titles[countTitles] = category.title(); 
+				System.out.println(titles[countTitles]);
+				countTitles++;
+			}
+		}
+		if (titles[0].equals(null))
+		{
+			titles[0] = "Round Over";
+		}
+		
+		JLabel label = new JLabel("Select one Category below: ");
+		panel.add(label);
+		int selectedOption = JOptionPane.showOptionDialog(null, panel, "Choose a category:", 
+				JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, titles , null);
+		
+		if (selectedOption < titles.length)
+		    if (gameModel.getBoard().hasCategory(titles[selectedOption]))
 		    {
-		    	return gameModel.getBoard().getCategory(userInput);
+		    	return gameModel.getBoard().getCategory(titles[selectedOption]);
+		    }
+		    else if (titles[selectedOption] == "Round Over")
+		    {
+		    	JOptionPane.showMessageDialog(null, "This round is over.");
+		    	return null;
 		    }
 		    else
 		    {
 		    	return promptForCategorySelection();
 		    }
-		} 
 		else
 		{
 			return promptForCategorySelection();
