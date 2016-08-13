@@ -1,6 +1,7 @@
 package main.woj.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
@@ -11,7 +12,9 @@ public class GameplayContainer extends JPanel {
 	private GameWheel wheel;
 	private GameBoard board;
 	private ActionController controller;
-	public GameplayContainer(ActionController controller){
+	private GameFrame frame;
+	public GameplayContainer(GameFrame frame, ActionController controller){
+		this.frame = frame;
 		this.controller = controller;
 		setup();
 		initComponents();
@@ -22,8 +25,10 @@ public class GameplayContainer extends JPanel {
 		this.add(board);	
 	}
 
-	private void setup() {
-		this.setSize(this.getMaximumSize());
+	private void setup() {		
+		int gameWidth = (int) (Math.round(frame.getWidth()));
+		int gameHeight = (int) (Math.round(frame.getHeight() * 0.70));
+		this.setPreferredSize(new Dimension(gameWidth, gameHeight));
 		this.setLayout(new GridLayout(1,1));
 	}
 	

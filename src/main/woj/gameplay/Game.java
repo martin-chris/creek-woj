@@ -29,6 +29,8 @@ public class Game extends Observable{
 	private int turns;
 	private Scanner scanner;
 	private Stack<Turn> turnCache;
+	private int numSpins;
+	private int spins;
 	
 	public Game(String questionSet){
 		initGame(questionSet);
@@ -223,6 +225,7 @@ public class Game extends Observable{
 	private void initGame(String questionSet){
 		turnCache = new Stack();
 		turns = 0;
+		spins = 0;
 		players = new ArrayList<Player>();
 		JOptionPane.showMessageDialog(null, "<html>Welcome to the Wheel of Jeopardy. "
 				+ "<br>Before the game begins, please enter the player's names. </html>");
@@ -231,9 +234,9 @@ public class Game extends Observable{
 		String displayPlayer2NameRequest = "Enter Player 2's Name: ";
 		
 		player1Name = promptForPlayerName(displayPlayer1NameRequest);
-		//System.out.println(player1Name);
+		System.out.println(player1Name);
 		player2Name = promptForPlayerName(displayPlayer2NameRequest);
-		//System.out.println(player2Name);
+		System.out.println(player2Name);
 		
 		players.add(new Player(player1Name));
 		players.add(new Player(player2Name));
@@ -306,5 +309,9 @@ public class Game extends Observable{
 
 	public ArrayList<Category> getCategories() {
 		return categories;
+	}
+
+	public int getSpinCount() {
+		return numSpins;
 	}
 }
