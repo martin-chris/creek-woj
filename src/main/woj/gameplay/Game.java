@@ -21,19 +21,19 @@ import main.woj.utils.QuestionDeserializer;
 public class Game extends Observable{
 	private final int ROUND_ONE_MULTIPLER = 200;
 	private final int ROUND_TWO_MULTIPLER = 400;
-	private final int TURNS_PER_ROUND = 50;
+	private final int SPINS_PER_ROUND = 50;
 	private ArrayList<Player> players;
 	private Board board;
 	private Wheel wheel;
-	private ArrayList<Category> categories;
+	private ArrayList<Category> roundOneCategories;
 	private int turns;
 	private Scanner scanner;
 	private Stack<Turn> turnCache;
-	private int numSpins;
-	private int spins;
+	private ArrayList<Category> roundTwoCategories;
+	private boolean roundOverFlag;
 	
-	public Game(String questionSet){
-		initGame(questionSet);
+	public Game(String questionSet1, String questionSet2){
+		initGame(questionSet1, questionSet2);
 		scanner = new Scanner(System.in);
 	}
 	
@@ -42,12 +42,21 @@ public class Game extends Observable{
 		//Reset values if necessary
 	}
 	
+	public Wheel getWheel(){
+		return wheel;
+	}
+	
 	public Board getBoard(){
 		return board;
 	}
 	
-	private Boolean roundOneCompleted(){
-		return turns >= TURNS_PER_ROUND;	
+	public Boolean roundOneCompleted(){
+		if (roundOverFlag || ((wheel.getNumSpins() >= SPINS_PER_ROUND) || board.isComplete())){
+			roundOverFlag = true;
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	public void takeTurn(){
@@ -59,10 +68,10 @@ public class Game extends Observable{
 	}
 	
 	private void printStatus(){
-		System.out.println("\nTurn: " + turns + " - " + getCurrentPlayer().getName() + " ($"+ getCurrentPlayer().getGameScore() + ")" + " just finished spinning the wheel...");
+		System.out.println("Spin: " + wheel.getNumSpins() + " - " + getCurrentPlayer().getName() + " ($"+ getCurrentPlayer().getGameScore() + ")" + " just finished spinning the wheel...");
 	}
 	
-	private int getMultiplier(){
+	public int getMultiplier(){
 		return roundOneCompleted() ? ROUND_TWO_MULTIPLER : ROUND_ONE_MULTIPLER;
 	}
 	
@@ -136,12 +145,12 @@ public class Game extends Observable{
 	}
 
 	public Question getNextQuestion(StaticCategory spinResult){
-		Category category = categories.get(spinResult.ordinal());
+		Category category = getCategories().get(spinResult.ordinal());
 		return category.nextQuestion();
 	}
 	
 	public String getCategoryKey(StaticCategory spinResult){
-		return categories.get(spinResult.ordinal()).title();
+		return getCategories().get(spinResult.ordinal()).title();
 	}
 	
 	public void answerQuestion(String categoryKey, Question question, String response){
@@ -150,7 +159,7 @@ public class Game extends Observable{
 	}
 	
 	public void handleQuestionSpin(StaticCategory spinResult){
-		Category category = categories.get(spinResult.ordinal());
+		Category category = getCategories().get(spinResult.ordinal());
 		promptNextQuestion(category);
 	}
 
@@ -177,7 +186,7 @@ public class Game extends Observable{
 	private Category promptForCategorySelection(){
 		//This is not used. The one being used is in action controller.
 		System.out.println("Choose a category:");
-		for (Category category : categories){
+		for (Category category : getCategories()){
 			System.out.println(category.title());
 		}
 		System.out.print("Category: ");
@@ -222,10 +231,11 @@ public class Game extends Observable{
 		return players.get(turns % players.size());
 	}
 	
-	private void initGame(String questionSet){
+	private void initGame(String questionSet1, String questionSet2){
 		turnCache = new Stack();
+		roundOverFlag = false;
+		wheel = new Wheel();
 		turns = 0;
-		spins = 0;
 		players = new ArrayList<Player>();
 		JOptionPane.showMessageDialog(null, "<html>Welcome to the Wheel of Jeopardy. "
 				+ "<br>Before the game begins, please enter the player's names. </html>");
@@ -241,12 +251,17 @@ public class Game extends Observable{
 		players.add(new Player(player1Name));
 		players.add(new Player(player2Name));
 		try {
-			categories = QuestionDeserializer.importQuestionSet(questionSet);
+			roundOneCategories = QuestionDeserializer.importQuestionSet(questionSet1);
+			roundTwoCategories = QuestionDeserializer.importQuestionSet(questionSet2);
 			wheel = new Wheel();
-			board = new Board(categories);
+			board = new Board(roundOneCategories);
 		} catch (YamlException | FileNotFoundException e) {
 			e.printStackTrace();
 		} 
+	}
+	
+	public void advanceToRoundTwo(){
+		board = new Board(roundTwoCategories);
 	}
 	
 	private String promptForPlayerName(String requestPrompt)
@@ -308,10 +323,11 @@ public class Game extends Observable{
 	}
 
 	public ArrayList<Category> getCategories() {
-		return categories;
+		return roundOneCompleted() ? roundTwoCategories : roundOneCategories;
 	}
 
-	public int getSpinCount() {
-		return numSpins;
+	public boolean hasNextQuestion(StaticCategory spinResult) {
+		Category category = getCategories().get(spinResult.ordinal());
+		return category.hasNext();
 	}
 }

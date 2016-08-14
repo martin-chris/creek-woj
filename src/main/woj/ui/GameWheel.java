@@ -22,7 +22,6 @@ import main.woj.controllers.ActionController;
 import main.woj.gameplay.Wheel;
 
 public class GameWheel extends JPanel{
-	private Wheel wheelModel;
 	private JLabel resultsLabel;
 	private JButton spinButton;
 	private ActionController controller;
@@ -30,7 +29,6 @@ public class GameWheel extends JPanel{
 			
 	public GameWheel(ActionController controller){
 		this.controller = controller;
-		this.wheelModel = new Wheel();
 
 		setup();
 		initComponents();
@@ -102,6 +100,7 @@ public class GameWheel extends JPanel{
 	}
 	
 	private void spinWheel() {
+		Wheel wheelModel = controller.getGame().getWheel();
 		this.controller.handleSpin(wheelModel.spin(), wheelModel.getNumSpins());
 	}
 	

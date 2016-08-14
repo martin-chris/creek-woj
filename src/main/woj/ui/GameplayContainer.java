@@ -44,4 +44,7 @@ public class GameplayContainer extends JPanel {
 		this.remove(wheel);
 		this.add(board);
 	}
+	public void initRoundtwo() {
+		board.initRoundTwo();
+	}
 }

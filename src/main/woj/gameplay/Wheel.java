@@ -37,7 +37,7 @@ public class Wheel {
 	}
 	
 	private int generateSpin(){
-		return random.nextInt(StaticCategory.values().length);
+		return random.nextInt(StaticCategory.values().length-6);
 	}
 
 	public int getNumSpins() {

@@ -82,4 +82,14 @@ public class GameFrame extends JFrame{
 	public void updateActionIndicator(){
 		this.gameplayPage.updateActionIndicator(gameModel);
 	}
+
+	public void initRoundTwo() {
+		gameplayPage.initRoundTwo();
+//		this.gameModel = controller.getGame();
+//		this.remove(gameplayPage);
+//		gameplayPage = new GameplayPage(this, controller);
+//		this.add(gameplayPage);
+		validate();
+		repaint();
+	}
 }
