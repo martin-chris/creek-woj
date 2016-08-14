@@ -1,8 +1,11 @@
 package main.woj.ui;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.Timer;
 import javax.swing.WindowConstants;
 
 import main.woj.controllers.ActionController;
@@ -15,6 +18,7 @@ public class GameFrame extends JFrame{
 	private GameplayPage gameplayPage;
 	Game gameModel;
 	private ActionController controller;
+	private Turn lastTurn;
 
 	public GameFrame(ActionController controller){
 		super("Wheel of Jeopardy");
@@ -47,9 +51,11 @@ public class GameFrame extends JFrame{
 	}
 
 	public void updateBoard() {
-		Turn lastTurn = gameModel.getLastTurn();
-		this.gameplayPage.getBoard().answer(lastTurn.getCategory());
-		this.repaint();
+		System.out.println("Updating board");
+		if (lastTurn != gameModel.getLastTurn()) {
+			lastTurn = gameModel.getLastTurn();
+			this.gameplayPage.getBoard().answer(lastTurn.getCategory());
+		}
 	}
 	
 	public void showBoard(){

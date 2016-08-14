@@ -1,6 +1,5 @@
 package main.woj.ui;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
@@ -36,7 +35,7 @@ public class GameplayContainer extends JPanel {
 		return board;
 	}
 	
-	public void switchToWheel(){
+	public void switchToWheel(){		
 		this.remove(board);
 		this.add(wheel);
 	}
