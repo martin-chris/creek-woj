@@ -1,5 +1,7 @@
 package main.woj.controllers;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
@@ -9,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 
 import main.woj.gameplay.Board;
 import main.woj.gameplay.Category;
@@ -21,22 +24,33 @@ import main.woj.ui.QuestionDialog;
 public class ActionController implements Observer {
 	private Game gameModel;
 	private GameFrame gameFrame;
+	private Timer animationTimer;
+	private ActionListener animationListener;
+	private Timer showBoardUpdateTimer;
+	private ActionListener updateBoardListener;
 	public ActionController(String questionSet){
 		gameModel = new Game(questionSet);
 		gameFrame = new GameFrame(this);
 		gameModel.addObserver(this);
 		gameFrame.updateScore();
 		gameFrame.updateActionIndicator();
+
+
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		//Called after each turn
+		update();
 		if (gameModel.getLastTurn() != null){
 			gameFrame.updateBoard();
-			gameFrame.updateScore();
-			gameFrame.updateActionIndicator();
 		}
+		promptSpin();
+	}
+	
+	private void update(){
+		gameFrame.updateScore();
+		gameFrame.updateActionIndicator();
 	}
 	
 	public Game getGame() {
@@ -59,7 +73,8 @@ public class ActionController implements Observer {
 	public void handleSpin(StaticCategory spinResult, int spinCount){
 		gameFrame.updateSpinCount(spinCount);
 		delegateSpinResultAction(spinResult);
-		promptSpin();
+		
+		//gameFrame.showBoard();
 	}
 	
 	private void delegateSpinResultAction(StaticCategory spinResult){
@@ -103,6 +118,8 @@ public class ActionController implements Observer {
 				handleSpinAgain();
 				break;
 		}
+		update();
+
 	}
 
 	private void handleBankrupt() {
@@ -111,17 +128,42 @@ public class ActionController implements Observer {
 	}
 
 	public void promptSpin(){
-		gameFrame.showWheel();
+		setupUpdateBoardAnimation();
+		showBoardUpdateTimer.start();//start the task
 	}
 	
-	public void promptNextQuestion(StaticCategory spinResult){
-		gameFrame.showBoard();
-		Question question = gameModel.getNextQuestion(spinResult);
-		String categoryKey = gameModel.getCategoryKey(spinResult);
-		gameModel.answerQuestion(categoryKey, question, QuestionDialog.showQuestion(gameFrame, question));
-		gameModel.takeTurn();
+	private void setupUpdateBoardAnimation(){
+        updateBoardListener = new ActionListener() {
+            public void actionPerformed(ActionEvent evt){
+            	gameFrame.showWheel();
+            }
+        };
+		showBoardUpdateTimer = new Timer(1000,updateBoardListener);//create the timer which calls the actionperformed method for every 1000 millisecond(1 second=1000 millisecond)
+		showBoardUpdateTimer.setRepeats(false);
+
+	}
+	
+	private void setupAskQuesitonAnimation(final StaticCategory spinResult) {
+        animationListener = new ActionListener() {
+            public void actionPerformed(ActionEvent evt){
+        		Question question = gameModel.getNextQuestion(spinResult);
+        		String categoryKey = gameModel.getCategoryKey(spinResult);
+        		gameModel.answerQuestion(categoryKey, question, QuestionDialog.showQuestion(gameFrame, question));
+
+        		gameModel.takeTurn();
+        		animationTimer.stop();
+            }
+        };
+		animationTimer = new Timer(500,animationListener);//create the timer which calls the actionperformed method for every 1000 millisecond(1 second=1000 millisecond)
+		animationTimer.setRepeats(false);
 	}
 
+	public void promptNextQuestion(final StaticCategory spinResult){
+		gameFrame.showBoard();
+		setupAskQuesitonAnimation(spinResult);
+		animationTimer.start();//start the task
+	}
+	
 	public void promptNextQuestion(Category category){
 		gameFrame.showBoard();
 		Question question = category.nextQuestion();
@@ -203,19 +245,5 @@ public class ActionController implements Observer {
 		{
 			return promptForCategorySelection();
 		}
-		
-//		System.out.println("Choose a category:");
-//		for (Category category : gameModel.getCategories()){
-//			System.out.println(category.title());
-//		}
-//		System.out.print("Category: ");
-//		String categoryTitle = scanner.next();
-//
-//		if( gameModel.getBoard().hasCategory(categoryTitle) ){
-//			return gameModel.getBoard().getCategory(categoryTitle);
-//		}else{
-//			//recursively call self until user inputs expected value
-//			return promptForCategorySelection();
-//		}
 	}
 }
