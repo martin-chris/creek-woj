@@ -66,7 +66,7 @@ public class GameBoard extends JPanel{
 		private void initComponents() {
 			add(new JButton(category.title()));
 			for(int i = 0; i < CATEGORIES_COUNT; i++){
-				int value = category.questions().get(i).value(BASE_MULTIPLIER);
+				int value = category.questions().get(i).value(controller.getGame().getMultiplier());
 				add(createNewButton(value));
 			}
 		}
@@ -84,7 +84,11 @@ public class GameBoard extends JPanel{
 			setLayout(new GridLayout(6,1));
 		}
 	}
-	
-	
 
+	public void initRoundTwo() {
+		this.boardModel = controller.getBoard();
+		this.removeAll();
+		this.populateBoard();
+		this.repaint();
+	}
 }

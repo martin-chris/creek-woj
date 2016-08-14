@@ -4,13 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Scanner;
 
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.Timer;
 
 import main.woj.gameplay.Board;
@@ -28,27 +25,44 @@ public class ActionController implements Observer {
 	private ActionListener animationListener;
 	private Timer showBoardUpdateTimer;
 	private ActionListener updateBoardListener;
-	public ActionController(String questionSet){
-		gameModel = new Game(questionSet);
+	private Boolean roundOneCompleteFlag = false;
+	public ActionController(String questionSet1, String questionSet2){
+		gameModel = new Game(questionSet1, questionSet2);
 		gameFrame = new GameFrame(this);
 		gameModel.addObserver(this);
 		gameFrame.updateScore();
 		gameFrame.updateActionIndicator();
-
-
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		//Called after each turn
-		update();
+		updateBottomPanel();
 		if (gameModel.getLastTurn() != null){
 			gameFrame.updateBoard();
 		}
+		checkRoundStatus();
 		promptSpin();
 	}
 	
-	private void update(){
+	private void checkRoundStatus(){
+		if(gameModel.roundOneCompleted() && !roundOneCompleteFlag){
+			roundOneCompleteFlag = true;
+			initRoundTwo();
+		}
+	}
+	
+	private void initRoundTwo() {
+		showRoundOvereNotice();
+		gameModel.advanceToRoundTwo();
+		gameFrame.initRoundTwo();
+	}
+
+	private void showRoundOvereNotice() {
+		JOptionPane.showMessageDialog(gameFrame, "Round One Complete. Beginning Round Two.");
+	}
+
+	private void updateBottomPanel(){
 		gameFrame.updateScore();
 		gameFrame.updateActionIndicator();
 	}
@@ -74,7 +88,24 @@ public class ActionController implements Observer {
 		gameFrame.updateSpinCount(spinCount);
 		delegateSpinResultAction(spinResult);
 		
-		//gameFrame.showBoard();
+		//Round check is handled elsewhere for questions
+		if(!isCategorySpin(spinResult)){
+			checkRoundStatus();
+		}
+	}
+	
+	private boolean isCategorySpin(StaticCategory spinResult){
+		switch(spinResult){
+			case CATEGORY_1:
+			case CATEGORY_2:
+			case CATEGORY_3:
+			case CATEGORY_4:
+			case CATEGORY_5:
+			case CATEGORY_6:
+				return true;
+			default:
+				return false;
+		}
 	}
 	
 	private void delegateSpinResultAction(StaticCategory spinResult){
@@ -119,8 +150,7 @@ public class ActionController implements Observer {
 				handleSpinAgain();
 				break;
 		}
-		update();
-
+		updateBottomPanel();
 	}
 
 	private void handleBankrupt() {
@@ -139,7 +169,7 @@ public class ActionController implements Observer {
             	gameFrame.showWheel();
             }
         };
-		showBoardUpdateTimer = new Timer(1000,updateBoardListener);//create the timer which calls the actionperformed method for every 1000 millisecond(1 second=1000 millisecond)
+		showBoardUpdateTimer = new Timer(500,updateBoardListener);//create the timer which calls the actionperformed method for every 1000 millisecond(1 second=1000 millisecond)
 		showBoardUpdateTimer.setRepeats(false);
 
 	}
@@ -155,14 +185,19 @@ public class ActionController implements Observer {
         		animationTimer.stop();
             }
         };
-		animationTimer = new Timer(500,animationListener);//create the timer which calls the actionperformed method for every 1000 millisecond(1 second=1000 millisecond)
+		animationTimer = new Timer(100,animationListener);//create the timer which calls the actionperformed method for every 1000 millisecond(1 second=1000 millisecond)
 		animationTimer.setRepeats(false);
 	}
 
 	public void promptNextQuestion(final StaticCategory spinResult){
-		gameFrame.showBoard();
-		setupAskQuesitonAnimation(spinResult);
-		animationTimer.start();//start the task
+		if( gameModel.hasNextQuestion(spinResult)){
+			gameFrame.showBoard();
+			setupAskQuesitonAnimation(spinResult);
+			animationTimer.start();//start the task
+		} else {
+			gameModel.hasNextQuestion(spinResult);
+			JOptionPane.showMessageDialog(gameFrame, "No more questions for category. Spin again.");
+		}
 	}
 	
 	public void promptNextQuestion(Category category){
