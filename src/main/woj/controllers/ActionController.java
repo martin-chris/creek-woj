@@ -70,7 +70,8 @@ public class ActionController implements Observer {
 			case CATEGORY_4:
 			case CATEGORY_5:
 			case CATEGORY_6:
-				System.out.println("Answering a question...");
+				JOptionPane.showMessageDialog(gameFrame, "Answer a Question from the " + gameModel.getCategoryKey(spinResult) + " Category!");
+				//System.out.println("Answering a question...");
 				promptNextQuestion(spinResult);
 				break;
 			case LOSE_TURN:

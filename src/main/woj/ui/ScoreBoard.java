@@ -25,6 +25,8 @@ public class ScoreBoard extends JPanel{
 		setLayout(new GridLayout(2,1));
 		playerOneDisplay = new JLabel();
 		playerTwoDisplay = new JLabel();
+		playerOneDisplay.setForeground(Color.RED);
+		playerTwoDisplay.setForeground(Color.RED);
 		add(playerOneDisplay);
 		add(playerTwoDisplay);
 	}
