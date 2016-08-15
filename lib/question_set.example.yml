@@ -209,33 +209,37 @@ game:
   - category:
     title: Random
     questions:
-     - question: Placeholder
+     - question: When parts function as a whole, this is called a
        difficulty: 1
-       answer: b
+       answer: a
        answers:
-        a: True
-        b: False
-     - question: Placeholder
+        a: System
+        b: Meteor
+        c: thrust
+     - question: Which of the planets listed below are called the "Gas Giants"
        difficulty: 2
        answer: a
        answers:
-        a: True
-        b: False
-     - question: Placeholder
+        a: Jupiter, Saturn, Uranus, Neptune
+        b: Pluto, Earth, Mercury, Mars
+     - question: When meteoroids land on earth, their name changes to
        difficulty: 3
-       answer: a
+       answer: b
        answers:
-        a: True
-        b: False
-     - question: Placeholder
+        a: Comet
+        b: Meteorite
+        c: Asteroids
+     - question: A blank in the earth was most likely caused by a _____ crashing into the ground
        difficulty: 4
        answer: b
        answers:
-        a: True
-        b: False
-     - question: Placeholder
+        a: Volcano/earthquake
+        b: Crater/meteorite
+        c: Comet/star
+     - question: How many days does it take the earth to travel around the sun?
        difficulty: 5
-       answer: b
+       answer: c
        answers:
-        a: True
-        b: False
+        a: 24 hours
+        b: 1 month
+        c: 365 days
