@@ -16,7 +16,7 @@ import main.woj.utils.QuestionDeserializer;
 public class Game extends Observable{
 	private final int ROUND_ONE_MULTIPLER = 200;
 	private final int ROUND_TWO_MULTIPLER = 400;
-	private final int SPINS_PER_ROUND =50;
+	private final int SPINS_PER_ROUND = 50;
 	private ArrayList<Player> players;
 	private Board board;
 	private Wheel wheel;
@@ -56,8 +56,7 @@ public class Game extends Observable{
 	}
 	
 	public Boolean roundOneCompleted(){
-		if (roundOverFlag || ((wheel.getNumSpins() >= SPINS_PER_ROUND) || board.isComplete())){
-			roundOverFlag = true;
+		if (roundOverFlag){
 			return true;
 		}else{
 			return false;
@@ -68,9 +67,16 @@ public class Game extends Observable{
 		return roundOneCompleted() && ((wheel.getNumSpins() >= SPINS_PER_ROUND*2) || board.isComplete());
 	}
 	
+	public void checkIfRoundOver(){
+		if ((wheel.getNumSpins() >= SPINS_PER_ROUND) || board.isComplete()){
+			roundOverFlag = true;
+		}
+	}
+	
 	public void takeTurn(){
 		printStatus();
 		//handleSpinResult(spinResult);
+		checkIfRoundOver();
 		turns++;
 		this.setChanged();
 		notifyObservers();

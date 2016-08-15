@@ -162,6 +162,7 @@ public class ActionController implements Observer {
 		
 		//Round check is handled elsewhere for questions
 		if(!isCategorySpin(spinResult)){
+			gameModel.checkIfRoundOver();
 			checkRoundStatus();
 		}
 	}
