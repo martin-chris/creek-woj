@@ -26,7 +26,6 @@ import main.woj.gameplay.Wheel.StaticCategory;
 
 
 public class GameWheel extends JPanel{
-	private Wheel wheelModel;
 	private JLabel resultsLabel;
 	private JButton spinButton;
 	private ActionController controller;
@@ -45,7 +44,6 @@ public class GameWheel extends JPanel{
 			
 	public GameWheel(ActionController controller){
 		this.controller = controller;
-		this.wheelModel = new Wheel();
 		
 		setup();
 		initComponents();
@@ -97,7 +95,7 @@ public class GameWheel extends JPanel{
 	private void setupListeners(){
 		spinButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				spinResult = wheelModel.spin();
+				spinResult = controller.getGame().getWheel().spin();
 				animateWheel();
 			}
         });

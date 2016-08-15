@@ -1,274 +1,259 @@
 game:
   - category:
-  title: Math
+    title: Math
     questions:
       - question: What is 75 + 25?
-	        difficulty: 1
-	        answer: a
-	        a: 100
-	        b: 45
-	        c: 230
-	        d: 125
-		    - question: What is 100 + 25?
-	        difficulty: 1
-	        answer: a
-	        a: 125
-	        b: 75
-	        c: 100
-	        d: 190
-	        - question: What is 24 * 67?
-	        difficulty: 1
-	        answer: b
-	        a: 100
-	        b: 1608
-	        c: 2300
-	        d: 1000
-            - question: What is 55 * 23?
-	        difficulty: 1
-	        answer: a
-	        a: 1265
-	        b: 1400
-	        c: 1200
-	        d: 1989
-	        - question: What is 500 + 89?
-	        difficulty: 1
-	        answer: c
-	        a: 100
-	        b: 45
-	        c: 589
-	        d: 125
-	- category: 
-	    title: Geography
-	    questions:
-	    	- question: The Homolographic projection has the correct representation of
-	        difficulty: 1
-	        answer: b
-	        a: shape
-	        b: area
-	        c: baring
-	        d: distance
-	      - question: The hazards of radiation belts include  
-          difficulty: 2
-          answer: d
+        difficulty: 1
+        answer: a
+        answers:
+          a: 100
+          b: 45
+          c: 230
+          d: 125
+      - question: What is 100 + 25?
+        difficulty: 1
+        answer: a
+        answers:
+          a: 125
+          b: 75
+          c: 100
+          d: 190
+      - question: What is 24 * 67?
+        difficulty: 1
+        answer: b
+        answers:
+          a: 100
+          b: 1608
+          c: 2300
+          d: 1000
+      - question: What is 55 * 23?
+        difficulty: 1
+        answer: a
+        answers:
+          a: 1265
+          b: 1400
+          c: 1200
+          d: 1989
+      - question: What is 500 + 89?
+        difficulty: 1
+        answer: c
+        answers:
+          a: 100
+          b: 45
+          c: 589
+          d: 125
+  - category: 
+    title: Geography
+    questions:
+      - question: The Homolographic projection has the correct representation of
+        difficulty: 1
+        answer: b
+        answers:
+          a: shape
+          b: area
+          c: baring
+          d: distance
+      - question: The hazards of radiation belts include  
+        difficulty: 2
+        answer: d
+        answers:
           a: deterioration of electronic circuits
-          b: dmaage of solar cells of spacecraft
+          b: damage of solar cells of spacecraft
           c: adverse effect on living organisms
           d: All of the above
-          - question: The great Victoria Desert is located in
-          difficulty: 3
-          answer: c
+      - question: The great Victoria Desert is located in
+        difficulty: 3
+        answer: c
+        answers:
           a: Canada
           b: West Africa
           c: Australia
           d: North America
-          - question: The intersecting lines drawn on maps and globes are
-          difficulty: 4
-          answer: c
+      - question: The intersecting lines drawn on maps and globes are
+        difficulty: 4
+        answer: c
+        answers:
           a: latitudes
           b: longitudes
           c: geographic grids
           d: None of the above
-          - question: The landmass of which of the following continents is the least?
-          difficulty: 5
-          answer: c
+      - question: The landmass of which of the following continents is the least?
+        difficulty: 5
+        answer: c
+        answers:
           a: Africa
           b: Asia
           c: Australia
           d: Europe
   - category: 
-    title: 
-      questions: 
-        - question: World War I began in what year? 
+    title: Politics
+    questions: 
+      - question: World War I began in what year? 
         difficulty: 1
         answer: d
-        a: 1923
-        b: 1938
-        c: 1917
-        d: 1914
-        - question: Adolf Hitler was born in what country?
-          difficulty: 2
-          answer: c
+        answers:
+          a: 1923
+          b: 1938
+          c: 1917
+          d: 1914
+      - question: Adolf Hitler was born in what country?
+        difficulty: 2
+        answer: c
+        answers:
           a: France
           b: Germany
           c: Austria
           d: Hungary
-        - question: John F. Kenedy was assassinated in 
-          difficulty: 3
-          answer: c
+      - question: John F. Kenedy was assassinated in 
+        difficulty: 3
+        answer: c
+        answers:
           a: 1973
           b: Austin
           c: Dallas
           d: 1958
-        - question: Who fought in the war of 1812?
-          difficulty: 4
-          answer: a
+      - question: Who fought in the war of 1812?
+        difficulty: 4
+        answer: a
+        answers:
           a: Andrew Jackson
           b: Arthur Wellsly
           c: Otto von Bismark
           d: Napoleon
-          - question: Joseph Stalin was the premiere of what country?  
-          difficulty: 5
-          answer: d
+      - question: Joseph Stalin was the premiere of what country?  
+        difficulty: 5
+        answer: d
+        answers:
           a: Estonia
           b: Ukraine
           c: Russia
           d: Soviet Union
-  - category: Science
-    title: 
-      questions:
-          - question: The nucleus of an atom consists of 
-          difficulty: 1
-          answer: c
+  - category:
+    title: Science
+    questions:
+      - question: The nucleus of an atom consists of 
+        difficulty: 1
+        answer: c
+        answers:
           a: Electrons and neutrons 
           b: Electrons and protons
           c: Protons and neutrons
           d: All of the above
-          - question: The most electronegative element among the following is
-          difficulty: 2
-          answer: a
+      - question: The most electronegative element among the following is
+        difficulty: 2
+        answer: a
+        answers:
           a: Sodium
           b: Bromine
           c: Fluorine
           d: Oxygen
-          - question: The metal used to recover copper from a solution of copper sulphate is 
-          difficulty: 3
-          answer: d
+      - question: The metal used to recover copper from a solution of copper sulphate is 
+        difficulty: 3
+        answer: d
+        answers:
           a: Na
           b: Ag
           c: Hg
           d: Fe
-          - question: The metallurgical process in which a metal is obtained in a fused state is called
-          difficulty: 4
-          answer: a
+      - question: The metallurgical process in which a metal is obtained in a fused state is called
+        difficulty: 4
+        answer: a
+        answers:
           a: Smelting
           b: Roasting
           c: Calcinations
           d: Froth Floatation
-          - question: The law which states that the amount of gas dissolved in a liquid is a proportional to its partial exposure is
-          difficulty: 5
-          answer: c
+      - question: The law which states that the amount of gas dissolved in a liquid is a proportional to its partial exposure is
+        difficulty: 5
+        answer: c
+        answers:
           a: Dalton's Law
           b: Gay Lussac's Law
           c: Henry's Law
           d: Raoultl's Law
-  - category: World Organizations
-    title:
-      questions:
-            - question: The chairmanship/presidency of the UN Security Council rotates among the Council Members
-          difficulty: 1
-          answer: a
+  - category:
+    title: World Organizations
+    questions:
+      - question: The chairmanship/presidency of the UN Security Council rotates among the Council Members
+        difficulty: 1
+        answer: a
+        answers:
           a: Every 6 months
           b: Every 3 months
           c: Every year
           d: Every month
-          - question: Which of the following is not a chief organization of the United Nations Organizations? 
-          difficulty: 2
-          answer: a
+      - question: Which of the following is not a chief organization of the United Nations Organizations? 
+        difficulty: 2
+        answer: a
+        answers:
           a: International Labour Organiation
           b: Security Council
           c: International Court of Justice
           d: General Assembly
-          - question: Besides the UK, the USA, Germany, and Japan, the G7 countries include
-          difficulty: 3
-          answer: d
+      - question: Besides the UK, the USA, Germany, and Japan, the G7 countries include
+        difficulty: 3
+        answer: d
+        answers:
           a: Canada, France, and Russia
           b: Canada, Italy, and the Netherlands
           c: France, the Neterlands, and Russia
           d: Canada, France, and Italy
-          - question: The headquarters of World Intellectual Property Organization (WIPO) is located in
-          difficulty: 4
-          answer: d
+      - question: The headquarters of World Intellectual Property Organization (WIPO) is located in
+        difficulty: 4
+        answer: d
+        answers:
           a: Paris
           b: Madrid
           c: New York
           d: Geneva
-          - question: Which of the following countries is not a member of G15 developing countries?
-          difficulty: 5
-          answer: a
+      - question: Which of the following countries is not a member of G15 developing countries?
+        difficulty: 5
+        answer: a
+        answers:
           a: Mexico
           b: Malaysia
           c: Brazil
           d: Bolivia
-  - category: Random
-    title: 
-      questions:
-          - question: What is authority?
-          difficulty: 1
-          answer: d
+  - category: 
+    title: Random
+    questions:
+      - question: What is authority?
+        difficulty: 1
+        answer: d
+        answers:
           a: The ultimate power in society
           b: A government ruled by a few
           c: The branch of government that enforces the law
           d: A government's ability to exercise power without resorting to force
-          - question: Which of the following is the same as a monarchy? 
-          difficulty: 2
-          answer: a
+      - question: Which of the following is the same as a monarchy? 
+        difficulty: 2
+        answer: a
+        answers:
           a: Dictatorship
           b: Parliamentary government
           c: Anarchy
           d: Aristocracy
-          - question: Totalitarian government is one extreme type of government.  Which of the following is at the other end of the policial spectrum?
-          difficulty: 3
-          answer: a
+      - question: Totalitarian government is one extreme type of government.  Which of the following is at the other end of the policial spectrum?
+        difficulty: 3
+        answer: a
+        answers:
           a: Dictatorship
           b: Parliamentary government
           c: Anarchy
           d: Aristocracy
-          - question: What is the difference between direct and representative democracy?
-          difficulty: 4
-          answer: b
+      - question: What is the difference between direct and representative democracy?
+        difficulty: 4
+        answer: b
+        answers:
           a: The amount of freedom citizens have
           b: Elected legislators
           c: A king
           d: Rule of the people
-          - question: In the percolation-up model, where does political power come from?
-          difficulty: 5
-          answer: a
-          a: The rulling class
-          b: The poeple
+      - question: In the percolation-up model, where does political power come from?
+        difficulty: 5
+        answer: a
+        answers:
+          a: The ruling class
+          b: The people
           c: The constitution
-          d: Religion          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
+          d: Religion

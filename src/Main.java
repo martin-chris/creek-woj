@@ -10,6 +10,6 @@ import com.esotericsoftware.yamlbeans.YamlException;
 
 public class Main {
 	public static void main(String[] args) throws FileNotFoundException, YamlException {
-		ActionController game = new ActionController("lib/question_set.example.yml", "lib/question_set.example.yml");
+		ActionController game = new ActionController("lib/question_set.example.yml", "lib/question_set_round_2.yml");
 	}
 }
