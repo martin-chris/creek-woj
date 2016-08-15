@@ -1,17 +1,13 @@
 package main.woj.ui;
 
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-import javax.swing.Timer;
 import javax.swing.WindowConstants;
 
 import main.woj.controllers.ActionController;
 import main.woj.gameplay.Game;
 import main.woj.gameplay.Game.Turn;
-import main.woj.gameplay.Player;
 
 public class GameFrame extends JFrame{
 	private LandingPage landingPage;
@@ -43,6 +39,9 @@ public class GameFrame extends JFrame{
 	}
 
 	public void initNewGame() {
+		controller.initPlayerNames();
+		updateScore();
+		updateActionIndicator();
 		this.remove(landingPage);
 		this.add(gameplayPage);
 		this.validate();
