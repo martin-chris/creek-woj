@@ -16,7 +16,7 @@ import main.woj.utils.QuestionDeserializer;
 public class Game extends Observable{
 	private final int ROUND_ONE_MULTIPLER = 200;
 	private final int ROUND_TWO_MULTIPLER = 400;
-	private final int SPINS_PER_ROUND = 2;
+	private final int SPINS_PER_ROUND =50;
 	private ArrayList<Player> players;
 	private Board board;
 	private Wheel wheel;
