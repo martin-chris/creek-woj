@@ -2,16 +2,11 @@ package main.woj.gameplay;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Observable;
 import java.util.Scanner;
 import java.util.Stack;
 
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import com.esotericsoftware.yamlbeans.YamlException;
 
@@ -303,5 +298,13 @@ public class Game extends Observable{
 	public boolean hasNextQuestion(StaticCategory spinResult) {
 		Category category = getCategories().get(spinResult.ordinal());
 		return category.hasNext();
+	}
+
+	public ArrayList<Category> getRoundOneCategories() {
+		return roundOneCategories;
+	}
+	
+	public ArrayList<Category> getRoundTwoCategories() {
+		return roundTwoCategories;
 	}
 }

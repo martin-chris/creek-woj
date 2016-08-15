@@ -2,6 +2,7 @@ package main.woj.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -38,6 +39,7 @@ public class ActionController implements Observer {
 	}
 
 	public void initNewGame(){
+		roundOneCompleteFlag = false;
 		gameModel = new Game(questionSet1, questionSet2);
 		gameFrame = new GameFrame(this);
 		gameModel.addObserver(this);
@@ -313,7 +315,8 @@ public class ActionController implements Observer {
 		JPanel panel = new JPanel(); 
 		//This for loop is to set the number of button selections
 		int numCategory = 0; 
-		for (Category category : gameModel.getCategories())
+		ArrayList<Category> categories = roundOneCompleteFlag ?  gameModel.getRoundTwoCategories() : gameModel.getRoundOneCategories();
+		for (Category category : categories)
 		{
 			if (category.questionCollection.hasNext())
 			{
@@ -323,7 +326,7 @@ public class ActionController implements Observer {
 		String [] titles = new String [numCategory]; 
 		//This for loop is to label the button selections
 		int countTitles = 0; 
-		for (Category category : gameModel.getCategories()){
+		for (Category category : categories){
 			if (category.questionCollection.hasNext())
 			{
 				titles[countTitles] = category.title(); 
