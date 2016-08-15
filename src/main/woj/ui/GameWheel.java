@@ -279,7 +279,7 @@ public class GameWheel extends JPanel{
         	wheelAngle = -330;
         }
  
-        Timer timer = new Timer(40, new ActionListener() {
+        Timer timer = new Timer(4, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {            	
             	if(acc == 15) {
