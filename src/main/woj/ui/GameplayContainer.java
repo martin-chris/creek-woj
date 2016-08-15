@@ -12,6 +12,7 @@ public class GameplayContainer extends JPanel {
 	private GameBoard board;
 	private ActionController controller;
 	private GameFrame frame;
+	private boolean showingWheel = false;
 	public GameplayContainer(GameFrame frame, ActionController controller){
 		this.frame = frame;
 		this.controller = controller;
@@ -35,16 +36,27 @@ public class GameplayContainer extends JPanel {
 		return board;
 	}
 	
-	public void switchToWheel(){		
+	public void switchToWheel(){
+		showingWheel = true;
 		this.remove(board);
 		this.add(wheel);
 	}
-	
+		
 	public void switchToBoard(){
+		showingWheel = false;
 		this.remove(wheel);
 		this.add(board);
 	}
 	public void initRoundtwo() {
 		board.initRoundTwo();
+		if(showingWheel){
+			this.remove(wheel);
+			this.wheel = new GameWheel(controller);
+			this.add(wheel);
+			this.validate();
+			this.repaint();
+		}else{
+			this.wheel = new GameWheel(controller);
+		}
 	}
 }

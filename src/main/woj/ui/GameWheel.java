@@ -49,8 +49,7 @@ public class GameWheel extends JPanel{
 		initComponents();
 		setupListeners();
 	}
-	
-	
+		
 	private void initComponents() {
 		resultsLabel = new JLabel("");
 		spinButton = new JButton("Spin Wheel");
