@@ -288,7 +288,7 @@ public class ActionController implements Observer {
 
 	public void handleLoseTurn(StaticCategory spinResult) {
 		//Spin again if player has extra turns
-		gameModel.handleLoseTurn();
+		//gameModel.handleLoseTurn();
 		if(gameModel.getCurrentPlayer().getExtraTurnsCounter() > 0){
 			int dialogResult = JOptionPane.showConfirmDialog(null, "Would you like to use a token?", "Redeem Token", JOptionPane.YES_NO_OPTION);
 			if (dialogResult == JOptionPane.YES_OPTION )
