@@ -74,5 +74,9 @@ public class GameplayPage extends JPanel{
 	public void updateActionIndicator(Game gameModel) {
 		actionIndicator.updateDisplay(gameModel);
 	}
+
+	public void initRoundTwo() {
+		gameplayContainer.initRoundtwo();
+	}
 	
 }

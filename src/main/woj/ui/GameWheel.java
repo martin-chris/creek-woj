@@ -46,7 +46,7 @@ public class GameWheel extends JPanel{
 	public GameWheel(ActionController controller){
 		this.controller = controller;
 		this.wheelModel = new Wheel();
-
+		
 		setup();
 		initComponents();
 		setupListeners();
@@ -104,6 +104,7 @@ public class GameWheel extends JPanel{
 	}
 	
 	private void spinWheel() {
+		Wheel wheelModel = controller.getGame().getWheel();
 		this.controller.handleSpin(spinResult, wheelModel.getNumSpins());
 	}
 	
