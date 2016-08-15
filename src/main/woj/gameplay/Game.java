@@ -103,8 +103,9 @@ public class Game extends Observable{
 		
 		addTurnToCache(new Turn(categoryKey, question, isCorrect));
 
-		System.out.println("Your answer is " + (isCorrect ? "correct" : "incorrect") +". Updating value by $" + pointsEarned);
-		System.out.println("Current earnings: $" + getCurrentPlayer().getGameScore());
+		JOptionPane.showMessageDialog(null, "Your answer is " + (isCorrect ? "correct" : "incorrect") +". Updating value by $" + pointsEarned);
+		//System.out.println("Your answer is " + (isCorrect ? "correct" : "incorrect") +". Updating value by $" + pointsEarned);
+		//System.out.println("Current earnings: $" + getCurrentPlayer().getGameScore());
 	}
 	
 	private void addTurnToCache(Turn turn) {
