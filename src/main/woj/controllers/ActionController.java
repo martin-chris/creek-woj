@@ -22,7 +22,7 @@ import main.woj.ui.GameFrame;
 import main.woj.ui.QuestionDialog;
 
 public class ActionController implements Observer {
-	private Game gameModel;
+	public Game gameModel;
 	private GameFrame gameFrame;
 	private Timer animationTimer;
 	private ActionListener animationListener;
